@@ -1,0 +1,56 @@
+﻿@model IEnumerable<SabalanTracking.DTO.ProcessDetailsResponse>
+
+@{
+    ViewData["Title"] = "جزئیات فرآیند";
+    var proces = (Proces)ViewBag.MainProcess;
+}
+
+<h3 class="text-success">
+    <span>جزبیات فرایند تولید</span>
+    <span>&nbsp @proces.Quantity &nbsp</span>
+    <span>@proces.Material.Name</span>
+</h3>
+
+<p>
+    <a asp-controller="Process" asp-action="Index">برگشت به لیست فرآیندها</a>
+</p>
+<div>
+
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>نام فرآیند</th>
+            <th>شخص مسئول </th>
+            <th>دستگاه مورد استفاده</th>
+            <th>متریال مصرف شده</th>
+            <th>تعداد متریال به ازای هر محصول</th>
+            <th>تعداد متریال مصرف شده</th>
+            <th>تاریخ فرآیند</th>
+            <th>شماره سریال متریال</th>
+            <th>توضیحات</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.proces.ProcessName.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.proces.Person.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.proces.Device.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.proces.Material.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.detaile.QntyPerPc)</td>
+                <td>@Html.DisplayFor(modelItem => item.Consumed)</td>
+                <td>@Html.DisplayFor(modelItem => item.proces.DateTime)</td>
+                <td>@Html.DisplayFor(modelItem => item.detaile.Product_SN)</td>
+                <td>@Html.DisplayFor(modelItem => item.detaile.Desciption)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.proces.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.proces.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.proces.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
