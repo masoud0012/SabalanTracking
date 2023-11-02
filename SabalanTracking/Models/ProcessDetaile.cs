@@ -1,5 +1,4 @@
-﻿using SabalanTracking.DTO;
-using SabalanTracking.Migrations;
+﻿
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 

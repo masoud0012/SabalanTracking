@@ -9,13 +9,17 @@ namespace SabalanTracking.Services
     public class FormullaDetailsService : IFormullaDetails
     {
         private readonly IRepoFormullaDetails _repo;
-        public FormullaDetailsService(IRepoFormullaDetails repo)
+        private readonly IUnitOfWork _unitOfWork;
+        public FormullaDetailsService(IRepoFormullaDetails repo,IUnitOfWork unitOfWork)
         {
             _repo=repo;
+            _unitOfWork = unitOfWork;
         }
-        public Task<FormullaDetails> Create(FormullaDetails model)
+        public async Task<FormullaDetails> Create(FormullaDetails model)
         {
-            throw new NotImplementedException();
+            await _repo.Add(model);
+            await _unitOfWork.SaveChanges();
+            return model;
         }
 
         public Task<bool> delete(int Id)
@@ -25,7 +29,10 @@ namespace SabalanTracking.Services
 
         public async Task<List<FormullaDetails>> GetAllAsync()
         {
-            var list=(await _repo.GetAllAsync()).ToList();
+            var list=(await _repo.GetAllAsync())
+                .Include(t=>t.Formula)
+                .Include(t=>t.Material)
+                .ToList();
             return list;
         }
 

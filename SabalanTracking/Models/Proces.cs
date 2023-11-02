@@ -1,6 +1,7 @@
 ﻿using SabalanTracking.DTO;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace SabalanTracking.Models
 {
@@ -39,7 +40,7 @@ namespace SabalanTracking.Models
         [Required]
         public string SN { get; set; } = string.Empty;
         public string? Description { get; set; } = string.Empty;
-
+        [JsonIgnore]
         public virtual List<ProcessDetaile>? ProcessDetails { get; set; }=new List<ProcessDetaile>();
     }
     public static class DetailsExtension

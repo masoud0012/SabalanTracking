@@ -3,6 +3,7 @@ using SabalanTracking.Models;
 using SabalanTracking.Filters;
 using SabalanTracking.ServiceContrcats;
 using Newtonsoft.Json;
+using SabalanTracking.Helper;
 
 namespace SabalanTracking.Controllers
 {
@@ -38,7 +39,6 @@ namespace SabalanTracking.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Proces process)
         {
-            int counter = 1;
             foreach (var item in process.ProcessDetails)
             {
                 if (item.Product_SN == null & item.QntyPerPc == 0)
@@ -53,9 +53,7 @@ namespace SabalanTracking.Controllers
                     return RedirectToAction("Create");
                 }
             }
-            process.SN = "SB" + DateTime.Now.ToString("yyyyyMMdd")
-                + process.ProcessNameId.ToString()
-                + process.MaterialId.ToString() + counter++;
+            process.SN = SnGenerator.GenerateSN(process);
             await _processService.Create(process);
             return RedirectToAction("Index");
         }

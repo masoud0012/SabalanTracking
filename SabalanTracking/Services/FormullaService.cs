@@ -1,40 +1,49 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SabalanTracking.Data;
 using SabalanTracking.Models;
+using SabalanTracking.Models.IRepository;
 using SabalanTracking.ServiceContrcats;
 
 namespace SabalanTracking.Services
 {
     public class FormullaService : IFormulla
     {
-        public TrackingDbContext _db;
-        public FormullaService(TrackingDbContext db)
+        private readonly IRepoFormulla _service;
+        private readonly IUnitOfWork _unitOfWork;
+        public FormullaService(IRepoFormulla service, IUnitOfWork unitOfWork)
         {
-            _db = db;
+            _service = service;
+            _unitOfWork = unitOfWork;
         }
         public async Task<Formulla> Create(Formulla model)
         {
-            await _db.Formulas.AddAsync(model);
-            await _db.SaveChangesAsync();
+            await _service.Add(model);
+            await _unitOfWork.SaveChanges();
             return model;
         }
 
         public async Task<bool> delete(int Id)
         {
-            Formulla formulla =await _db.Formulas.FirstOrDefaultAsync(t => t.Id == Id);
-            _db.Formulas.Remove(formulla);
-            _db.SaveChanges();
+            var model = (await _service.GetById(Id)).FirstOrDefault();
+            await _service.Delete(model);
+            await _unitOfWork.SaveChanges();
             return true;
         }
-         public async Task<List<Formulla>> GetAllAsync()
+        public async Task<List<Formulla>> GetAllAsync()
         {
-            var list = await _db.Formulas.Include(t=>t.Material).ToListAsync();
+            var list = (await _service.GetAllAsync()).Include(t => t.Material).ToList();
             return list;
         }
         public async Task<Formulla> GetById(int id)
         {
-            return await _db.Formulas.FirstOrDefaultAsync(t => t.Id == id);
+            return (await _service.GetById(id)).FirstOrDefault();
         }
+
+        public async Task<Formulla> GetByMaterialID(int id)
+        {
+            var model = await _service.GetByMaterialId(id);
+            return model;
+        }
+
         public Task<Formulla> update(Formulla model)
         {
             throw new NotImplementedException();

@@ -8,7 +8,7 @@
             method: "GET",
             success: function (response) {
                 console.log(response)
-                GetMaterials($.parseJSON(response));
+                /*GetMaterials*/($.parseJSON(response));
             },
             error: function (xhr, status, error) {
                 console.error("Error fetching data: " + error);
@@ -16,7 +16,7 @@
         });
     });
 
-    function GetMaterials(list) {
+/*    function GetMaterials(list) {
         console.log(rows)
         var selectM = $('#ProcessDetails_0__ProcessID_SN')
         selectM.empty();
@@ -26,5 +26,5 @@
             newOption += '<Option value="' + list[i].Id + '">' + list[i].SN + '</Option>'
         }
         selectM.append(newOption)
-    }
+    }*/
 })

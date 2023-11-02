@@ -13,28 +13,30 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ProcessName)
+               محصول تولید شده
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Device)
+                سریال محصول تولید شده
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Person)
+                نام فرآیند
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Material)
+                تجهیزات مورد استفاده
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Quantity)
+                مسئول فرآیند
+            </th>
+           
+            <th>
+                تعداد تولید شده
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateTime)
+                زمان فرآیند
             </th>
+         
             <th>
-                @Html.DisplayNameFor(model => model.SN)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
+                توضیحات
             </th>
             <th></th>
         </tr>
@@ -44,6 +46,12 @@
         {
             <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Material.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SN)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.ProcessName.Name)
                 </td>
                 <td>
@@ -52,18 +60,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Person.Name)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Material.Name)
-                </td>
+                
                 <td>
                     @Html.DisplayFor(modelItem => item.Quantity)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DateTime)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SN)
-                </td>
+                
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
