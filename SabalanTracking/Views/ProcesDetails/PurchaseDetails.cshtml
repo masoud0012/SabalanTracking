@@ -1,0 +1,65 @@
+﻿@model Proces
+
+@{
+    ViewData["Title"] = "PurchaseDetails";
+}
+
+<h3>جزوئیات خرید</h3>
+<p>
+<span></span>
+    <span>&nbsp @Model.Quantity</span>
+    <span>&nbsp @Model.Material.Name</span>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                مسئول خرید
+            </th>
+            <th>
+                متریال خریداری شده
+            </th>
+            <th>
+                تعداد خریداری شده
+            </th>
+            <th>
+                تاریخ خرید
+            </th>
+            <th>
+                شماره سریال متریال
+            </th>
+            <th>
+                توضیحات
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Person.Name)
+            </td>
+            <td>
+                <span> @Html.DisplayFor(modelItem => modelItem.Material.Name)</span>
+                <span>@Html.DisplayFor(modelItem => modelItem.Material.Unit.Name)</span>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.DateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.SN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Description)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@Model.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

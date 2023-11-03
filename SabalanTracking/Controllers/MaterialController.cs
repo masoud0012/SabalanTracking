@@ -10,9 +10,14 @@ namespace SabalanTracking.Controllers
     {
         private readonly IMaterial _service;
         private readonly IUnitOfWork _unitOfWork;
-        public MaterialController(IMaterial service, IUnitOfWork unitOfWork)
+        private readonly IProductCategory _catService;
+        private readonly IUnit _unitService;
+        public MaterialController(IMaterial service, IUnitOfWork unitOfWork,
+            IProductCategory catService,IUnit unitService)
         {
             _service = service;
+            _catService = catService;
+            _unitService = unitService;
             _unitOfWork = unitOfWork;
         }
 
@@ -20,6 +25,13 @@ namespace SabalanTracking.Controllers
         public async Task<IActionResult> Index()
         {
             var list = await _service.GetAllAsync();
+            foreach (var item in list)
+            {
+                var category = await _catService.GetById(item.CatId);
+                var unit = await _unitService.GetById(item.UnitId.Value);
+                item.ProductCat=category;
+                item.Unit = unit;
+            }
             return View(list);
         }
 

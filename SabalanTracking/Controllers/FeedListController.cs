@@ -22,9 +22,14 @@ namespace SabalanTracking.Controllers
         [Route("[action]/{id}")]
         public async Task<string> GetAllSNByMaterialID(int id)
         {
-            var formull = await _fService.GetByMaterialID(id);
-            var details = await _dService.GetByFormullId(formull.Id);
+            
             List<List<Proces>> list = new List<List<Proces>>();
+            var formull = await _fService.GetByMaterialID(id);
+            if (formull is null)
+            {
+                return JsonConvert.SerializeObject(list);
+            }
+            var details = await _dService.GetByFormullId(formull.Id);
             foreach (FormullaDetails item in details)
             {
                 var model = await _pService.GetProcessByMateralId(item.MaterialId);
@@ -35,9 +40,7 @@ namespace SabalanTracking.Controllers
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
                 Formatting = Formatting.Indented // optional, for pretty-printed JSON
             };
-
-            string items = JsonConvert.SerializeObject(list, settings);
-            return items;
+            return JsonConvert.SerializeObject(list, settings);
         }
     }
 }

@@ -11,8 +11,10 @@ namespace SabalanTracking.Models
         [Required]
         [ForeignKey("ProductCat")]
         public int CatId { get; set; }
-        
+
+        [ForeignKey(nameof(Unit))]
         public int? UnitId { get; set; }
+        public Unit? Unit { get; set; }
         [Required]
         [StringLength(300)]
         public string Name { get; set; } = "";
