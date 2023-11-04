@@ -4,6 +4,7 @@ using SabalanTracking.Filters;
 using SabalanTracking.ServiceContrcats;
 using Newtonsoft.Json;
 using SabalanTracking.Helper;
+using SabalanTracking.Models.IRepository;
 
 namespace SabalanTracking.Controllers
 {
@@ -12,10 +13,13 @@ namespace SabalanTracking.Controllers
     {
         private readonly IProcess _processService;
         private readonly IFormullaDetails _formullaDetails;
-        public ProcessController(IProcess processService, IFormullaDetails formullaDetails)
+        private readonly IUnitOfWork _unitOfWork;
+        public ProcessController(IProcess processService, IFormullaDetails formullaDetails
+            ,IUnitOfWork unitOfWork)
         {
             _processService = processService;
             _formullaDetails = formullaDetails;
+            _unitOfWork = unitOfWork;
         }
         [Route("[action]")]
         public async Task<IActionResult> Index()
@@ -32,6 +36,7 @@ namespace SabalanTracking.Controllers
 
             Proces process = new Proces();
             process.ProcessDetails.Add(new ProcessDetaile() { Id = 1 });
+            await _unitOfWork.SaveChanges();
             return View(process);
         }
 
