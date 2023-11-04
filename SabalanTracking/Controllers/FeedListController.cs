@@ -46,8 +46,8 @@ namespace SabalanTracking.Controllers
         }
 
         [HttpGet]
-        [Route("[action]/{id}")]
-        public async Task<string> GetFormullaBySN(int id)
+        [Route("[action]/{SN}")]
+        public async Task<string> GetFormullaBySN(string SN)
         {
             Proces proces=await _pService.GetProcessBySN(SN);
             Formulla formulla = await _fService.GetByMaterialID(proces.MaterialId);
