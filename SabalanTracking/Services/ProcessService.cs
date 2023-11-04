@@ -1,54 +1,57 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SabalanTracking.Data;
 using SabalanTracking.Models;
+using SabalanTracking.Models.IRepository;
 using SabalanTracking.ServiceContrcats;
 
 namespace SabalanTracking.Services
 {
     public class ProcessService : IProcess
     {
-        private readonly TrackingDbContext _dbContext;
-        public ProcessService(TrackingDbContext dbContext)
+        private readonly IRepoProcess _service;
+        public ProcessService(IRepoProcess dbContext)
         {
-            _dbContext = dbContext;
+            _service = dbContext;
         }
 
         public async Task<Proces> Create(Proces model)
         {
-            await _dbContext.Processes.AddAsync(model);
-            await _dbContext.SaveChangesAsync();
+            await _service.Add(model);
             return model;
         }
 
         public async Task<bool> delete(int Id)
         {
-            Proces proces = await _dbContext.Processes.FirstOrDefaultAsync(t => t.Id == Id);
-            _dbContext.Processes.Remove(proces);
-            _dbContext.SaveChanges();
+            var model = (await _service.GetById(Id)).FirstOrDefault();
+            await _service.Delete(model);
             return true;
         }
 
         public async Task<List<Proces>> GetAllAsync()
         {
-            List<Proces> list = await _dbContext.Processes
-                          .Include(p => p.Material).Include(p => p.Device)
-                          .Include(p => p.ProcessName).Include(p => p.Person).ToListAsync();
+            var list = (await _service.GetAllAsync()).
+                Include(p => p.Material).Include(p => p.Device)
+                          .Include(p => p.Material.Unit)
+                          .Include(p => p.ProcessName).Include(p => p.Person).ToList();
             return list;
         }
 
         public async Task<Proces> GetById(int Id)
         {
-            Proces? proces = await _dbContext.Processes
+            var proces = (await _service.GetById(Id))
                     .Include(p => p.Material).Include(p => p.Device)
                     .Include(p => p.ProcessName).Include(p => p.Person)
-                    .FirstOrDefaultAsync(t=>t.Id==Id);
+                    .Include(p => p.Material.Unit)
+                    .FirstOrDefault(t => t.Id == Id);
             return proces;
         }
 
         public async Task<List<Proces>> GetProcessByMateralId(int Id)
         {
-            List<Proces>? list = await _dbContext.Processes
-                                     .Where(t => t.MaterialId == Id).ToListAsync();
+            List<Proces>? list = (await _service.GetProcessByMaterialId(Id))
+                .Include(p => p.Material).Include(p => p.Device)
+                          .Include(p => p.Material.Unit)
+                          .Include(p => p.ProcessName).Include(p => p.Person).ToList();
             return list;
         }
 
@@ -59,12 +62,7 @@ namespace SabalanTracking.Services
 
         public async Task<Proces> GetProcessBySN(string SN)
         {
-            var process = await _dbContext.Processes
-                .Include(t => t.ProcessName)
-                .Include(t => t.Device)
-                .Include(t => t.Person)
-                .Include(t => t.Material)
-                .FirstOrDefaultAsync(t => t.SN == SN);
+            var process =await _service.GetProcessBySN(SN);
             return process;
         }
 

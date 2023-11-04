@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SabalanTracking.Data;
 
@@ -11,9 +12,11 @@ using SabalanTracking.Data;
 namespace SabalanTracking.Migrations
 {
     [DbContext(typeof(TrackingDbContext))]
-    partial class TrackingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231103031333_AddUnitForeignKey2")]
+    partial class AddUnitForeignKey2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -414,9 +417,6 @@ namespace SabalanTracking.Migrations
                     b.Property<int>("DeviceId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("FormullaId")
-                        .HasColumnType("int");
-
                     b.Property<int>("MaterialId")
                         .HasColumnType("int");
 
@@ -436,8 +436,6 @@ namespace SabalanTracking.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DeviceId");
-
-                    b.HasIndex("FormullaId");
 
                     b.HasIndex("MaterialId");
 
@@ -650,10 +648,6 @@ namespace SabalanTracking.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SabalanTracking.Models.Formulla", "FormulaSelected")
-                        .WithMany("Proces")
-                        .HasForeignKey("FormullaId");
-
                     b.HasOne("SabalanTracking.Models.Material", "Material")
                         .WithMany("Processs")
                         .HasForeignKey("MaterialId")
@@ -673,8 +667,6 @@ namespace SabalanTracking.Migrations
                         .IsRequired();
 
                     b.Navigation("Device");
-
-                    b.Navigation("FormulaSelected");
 
                     b.Navigation("Material");
 
@@ -701,8 +693,6 @@ namespace SabalanTracking.Migrations
 
             modelBuilder.Entity("SabalanTracking.Models.Formulla", b =>
                 {
-                    b.Navigation("Proces");
-
                     b.Navigation("formullaDetails");
                 });
 

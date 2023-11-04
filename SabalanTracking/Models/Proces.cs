@@ -14,10 +14,13 @@ namespace SabalanTracking.Models
         public int ProcessNameId { get; set; }
         public virtual ProcessName? ProcessName { get; private set; }
 
+        [ForeignKey(nameof(FormulaSelected))]
+        public int? FormullaId { get; set; }
+        public virtual Formulla? FormulaSelected { get; set;}
 
         [Required]
         [ForeignKey("Device")]
-        public int DeviceId { get; set; }
+        public int DeviceId { get; set; } = 1;
         public virtual Device? Device { get; private set; }
 
 

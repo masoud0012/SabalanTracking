@@ -10,11 +10,11 @@ function AddItem(btn) {
     var lastRowIdx = document.getElementById("hdnLastIndex").value;
     var nextRowIdx = eval(lastRowIdx) + 1;
     document.getElementById("hdnLastIndex").value = nextRowIdx;
-
     rowOuterHtml = rowOuterHtml.replaceAll("[" + lastRowIdx + "]", "[" + nextRowIdx + "]")
     rowOuterHtml = rowOuterHtml.replaceAll("_" + lastRowIdx + "_", "_" + nextRowIdx + "_")
     rowOuterHtml = rowOuterHtml.replaceAll("-" + lastRowIdx, "-" + nextRowIdx)
-
+/*    rowOuterHtml = rowOuterHtml.replaceAll("index=" + lastRowIdx, "index=" + nextRowIdx)
+*/
     var newRow = table.insertRow();
 
     newRow.innerHTML = rowOuterHtml;

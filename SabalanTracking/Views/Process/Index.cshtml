@@ -29,7 +29,10 @@
             </th>
            
             <th>
-                تعداد تولید شده
+                تعداد 
+            </th>
+            <th>
+                واحد
             </th>
             <th>
                 زمان فرآیند
@@ -63,6 +66,9 @@
                 
                 <td>
                     @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Material.Unit.Name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DateTime)

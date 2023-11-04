@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using SabalanTracking.Models;
 using SabalanTracking.Models.IRepository;
 using SabalanTracking.ServiceContrcats;
@@ -13,7 +14,7 @@ namespace SabalanTracking.Controllers
         private readonly IProductCategory _catService;
         private readonly IUnit _unitService;
         public MaterialController(IMaterial service, IUnitOfWork unitOfWork,
-            IProductCategory catService,IUnit unitService)
+            IProductCategory catService, IUnit unitService)
         {
             _service = service;
             _catService = catService;
@@ -29,7 +30,7 @@ namespace SabalanTracking.Controllers
             {
                 var category = await _catService.GetById(item.CatId);
                 var unit = await _unitService.GetById(item.UnitId.Value);
-                item.ProductCat=category;
+                item.ProductCat = category;
                 item.Unit = unit;
             }
             return View(list);
@@ -86,6 +87,21 @@ namespace SabalanTracking.Controllers
             await _service.update(model);
             await _unitOfWork.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        [Route("[action]/{id}")]
+        public async Task<string> GetById(int id)
+        {
+            JsonSerializerSettings settings = new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                Formatting = Formatting.Indented // optional, for pretty-printed JSON
+            };
+            var model = (await _service.GetById(id));
+            var unit = await _unitService.GetById(model.UnitId.Value);
+            model.Unit = unit;
+            return JsonConvert.SerializeObject(model, settings);
         }
     }
 }

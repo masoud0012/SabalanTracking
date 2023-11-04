@@ -17,17 +17,20 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                شماره فرمول
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MaterialId)
+                شماره متریال
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Material.Name)
+                نام متریال
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.quantity)
+                <span>تعداد لازم جهت تولید هر </span>
+                
+                <span><span>@Model.FirstOrDefault().Formula.Material.Name</span></span>
             </th>
+            <th>واحد</th>
             <th></th>
         </tr>
     </thead>
@@ -46,6 +49,10 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Material.Unit.Name)
+
                 </td>
 @*                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

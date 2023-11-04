@@ -1,14 +1,25 @@
 ﻿$(document).ready(function () {
     var firstRow = $("#details tbody tr:first option:not(:first)");
-
+    
     console.log(firstRow);
     $("#MaterialId").on("change", function () {
         var SelectMaterial = $("#MaterialId")
         $.ajax({
+            url: "/Material/GetById/" + SelectMaterial.val(),
+            method: "GET",
+            success: function (response) {
+                var material = $.parseJSON(response)
+                $("#UnitOfMaterial").text(material.Unit.Name)
+            },
+            error: function (xhr, status, error) {
+                console.error("Error fetching data: " + error);
+            }
+        });
+        //Get All SN based on selected material
+        $.ajax({
             url: "/FeedList/GetAllSNByMaterialID/" + SelectMaterial.val(),
             method: "GET",
             success: function (response) {
-                console.log($.parseJSON(response));
                 FeedSelectTag($.parseJSON(response))
             },
             error: function (xhr, status, error) {
@@ -22,7 +33,6 @@
 
         $.each(list, function (item, i) {
             $.each(i, function (item, index) {
-                console.log(index)
                 rows.append($('<option>', {
                     value: index.SN,
                     text: "Material:" + index.Material.Name + "||" + "   SN: " + index.SN +"  ||Quantity in stock: "+ index.Quantity

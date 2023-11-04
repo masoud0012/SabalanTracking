@@ -31,7 +31,7 @@ namespace SabalanTracking.Controllers
             var list = await _processDetails.GetDetailsByProcessId(id);
             foreach (var item in list)
             {
-                var unit =await _unitService.GetById(item.Process.MaterialId);
+                var unit = await _unitService.GetById(item.Process.MaterialId);
                 item.Process.Material.Unit = unit;
             }
             List<ProcessDetailsResponse> newList = new List<ProcessDetailsResponse>();

@@ -29,6 +29,16 @@
                     </div>
                 </div>
                 <div class="col-md-4">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="FormullaId" class="control-label">فرمول مورداستفاده</label>
+                        <select asp-for="FormullaId" class="form-control" asp-items="ViewBag.Furmulla">
+                            <option>فرمول مورد استفاده</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
                     <div class="form-group">
                         <label asp-for="DeviceId" class="control-label">نام دستگاه جهت تولید فرآیند</label>
                         <select asp-for="DeviceId" class="form-control" asp-items="ViewBag.Devices">
@@ -46,8 +56,16 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label asp-for="Quantity" class="control-label">تعداد تولید شده</label>
-                        <input asp-for="Quantity" class="form-control" />
+                        <label asp-for="Quantity" class="control-label">تعداد خرید/تولید شده</label>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input asp-for="Quantity" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <span id="UnitOfMaterial"></span>
+                            </div>
+                        </div>
+
                         <span asp-validation-for="Quantity" class="text-danger"></span>
                     </div>
                 </div>
@@ -79,12 +97,16 @@
                             {
                                 <tr>
                                     <td>
-                                        @Html.DropDownListFor(m=>m.ProcessDetails[i].Product_SN
-                                    ,(SelectList)ViewBag.Process,"سریال نامبر مواد لازم جهت تولید")
-
+                                        <select asp-items="@ViewBag.Proces2" asp-for="@Model.ProcessDetails[i].Product_SN" onchange="GetQauntityByFormull(this)">
+                                            <option>انتخاب سریال نامیر متریال جهت تولید</option>
+                                        </select>
                                     </td>
-                                    <td>
+                                    @*   <td>
+                                @Html.DropDownListFor(m=>m.ProcessDetails[i].Product_SN
+                                ,(SelectList)ViewBag.Process,"سریال نامبر مواد لازم جهت تولید")
 
+                                </td> *@
+                                    <td>
                                         @Html.EditorFor(m=>m.ProcessDetails[i].QntyPerPc,"تعداد لازم جهت تولید")
                                     </td>
                                     <td>
@@ -115,7 +137,7 @@
     }
     <script src="~/js/AddRemoveRows.js"> </script>
     <script src="~/js/CheckPurchaseProcess.js"> </script>
-    @*  <script src="~/js/GetProcessByMaterialID.js"></script>
-      <script src="~/js/GetFormullByMaterialId.js"></script> *@
     <script src="~/js/GetListByMaterialId.js"></script>
+    <script src="~/js/GetFormulls.js"></script>
+
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SabalanTracking.Helper;
 using SabalanTracking.Models;
 using SabalanTracking.ServiceContrcats;
 
@@ -35,12 +36,23 @@ namespace SabalanTracking.Controllers
                 var model = await _pService.GetProcessByMateralId(item.MaterialId);
                 list.Add(model);
             }
-            JsonSerializerSettings settings = new JsonSerializerSettings
+           return await ConvertObjToJson.ConvertToJson(list);
+     /*       JsonSerializerSettings settings = new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
                 Formatting = Formatting.Indented // optional, for pretty-printed JSON
             };
-            return JsonConvert.SerializeObject(list, settings);
+            return JsonConvert.SerializeObject(list, settings);*/
         }
+
+        [HttpGet]
+        [Route("[action]/{id}")]
+        public async Task<string> GetFormullaBySN(int id)
+        {
+            Proces proces=await _pService.GetProcessBySN(SN);
+            Formulla formulla = await _fService.GetByMaterialID(proces.MaterialId);
+            return await ConvertObjToJson.ConvertToJson(formulla);
+        }
+
     }
 }

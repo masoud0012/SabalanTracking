@@ -11,6 +11,7 @@ namespace SabalanTracking.Models
         public int FormullaId {  get; set; }
         public Formulla Formula { get; set; }
 
+
         [ForeignKey(nameof(Material))]
         public int MaterialId { get; set; }
         public Material Material { get; set; }

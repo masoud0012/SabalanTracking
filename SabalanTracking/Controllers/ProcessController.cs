@@ -20,7 +20,7 @@ namespace SabalanTracking.Controllers
         [Route("[action]")]
         public async Task<IActionResult> Index()
         {
-            List<Proces> processes = await _processService.GetAllAsync();
+            List<Proces> processes = (await _processService.GetAllAsync());
             return View(processes);
         }
 
@@ -71,5 +71,6 @@ namespace SabalanTracking.Controllers
             }
             return JsonConvert.SerializeObject(list);
         }
+
     }
 }

@@ -14,7 +14,9 @@ namespace SabalanTracking.Data.Repository
 
         public async Task<Formulla> GetByMaterialId(int id)
         {
-            Formulla model=await _dbset.FirstOrDefaultAsync(t=>t.ProductId==id);
+            Formulla model=await _dbset
+                .Include(t=>t.formullaDetails)
+                .FirstOrDefaultAsync(t=>t.ProductId==id);
             return model;
         }
     }
