@@ -36,7 +36,6 @@ namespace SabalanTracking.Controllers
 
             Proces process = new Proces();
             process.ProcessDetails.Add(new ProcessDetaile() { Id = 1 });
-            await _unitOfWork.SaveChanges();
             return View(process);
         }
 
@@ -60,6 +59,8 @@ namespace SabalanTracking.Controllers
             }
             process.SN = SnGenerator.GenerateSN(process);
             await _processService.Create(process);
+            await _unitOfWork.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
