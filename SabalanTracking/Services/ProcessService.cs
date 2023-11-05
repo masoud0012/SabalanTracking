@@ -32,7 +32,8 @@ namespace SabalanTracking.Services
             var list = (await _service.GetAllAsync()).
                 Include(p => p.Material).Include(p => p.Device)
                           .Include(p => p.Material.Unit)
-                          .Include(p => p.ProcessName).Include(p => p.Person).ToList();
+                          .Include(p => p.ProcessName)
+                          .Include(p => p.Person).ToList();
             return list;
         }
 

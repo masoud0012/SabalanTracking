@@ -22,7 +22,7 @@ namespace SabalanTracking.Models
         [StringLength(300)]
         public string Name { get; set; } = "";
         [JsonIgnore]
-        public virtual ICollection<Proces> Processs { get; set; } = new List<Proces>();
+        public virtual List<Proces> Processs { get; set; } = new List<Proces>();
 
     }
 }

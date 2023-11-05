@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using SabalanTracking.Models;
 using SabalanTracking.Models.IRepository;
@@ -38,8 +39,12 @@ namespace SabalanTracking.Controllers
 
         [Route("[action]")]
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var Cats=await _catService.GetAllAsync();
+            var units=await _unitService.GetAllAsync();
+            ViewBag.CatId = Cats.Select(t => new SelectListItem() { Value = t.Id.ToString(), Text = t.Category });
+            ViewBag.UnitId = units.Select(t => new SelectListItem() { Value = t.Id.ToString(), Text = t.Name });
             var model = new Material();
             return View(model);
         }
@@ -84,6 +89,10 @@ namespace SabalanTracking.Controllers
         [Route("[action]/{id}")]
         public async Task<IActionResult> Edit(Material model)
         {
+            var Cats = await _catService.GetAllAsync();
+            var units = await _unitService.GetAllAsync();
+            ViewBag.CatId = Cats.Select(t => new SelectListItem() { Value = t.Id.ToString(), Text = t.Category });
+            ViewBag.UnitId = units.Select(t => new SelectListItem() { Value = t.Id.ToString(), Text = t.Name });
             await _service.update(model);
             await _unitOfWork.SaveChanges();
             return RedirectToAction("Index");

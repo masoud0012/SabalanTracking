@@ -1,8 +1,109 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model IEnumerable<SabalanTracking.Models.Proces>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@{
+    ViewData["Title"] = "شرکت سیلان آزمایش اروم";
+}
+<div class="row">
+    <h1>
+        نرم افزار ردیابی شرکت سبلان آزمایش اروم
+    </h1>
 </div>
+<div class="row">
+    <h2 class="text-sucsess">آخرین فرآیندهای انجام شده</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    نام فرآیند
+                </th>
+                <th>
+                    فرمول فرآیند
+                </th>
+                <th>
+                    دستگاه مورد استفاده
+                </th>
+                <th>
+                    مسئول فرآیند
+                </th>
+                <th>
+                    کالای تولیدی
+                </th>
+                <th>
+                    تعداد
+                </th>
+                <th>
+                    واحد
+                </th>
+                <th>
+                    تاریخ فرآیند
+                </th>
+                <th>
+                    سریال کالا
+                </th>
+                <th>
+                    توضیحات
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProcessName.Name)
+                    </td>
+                    <td>
+                        @{
+                            if (item.ProcessNameId != 1)
+                            {
+                                @Html.DisplayFor(modelItem => item.FormulaSelected.Name)
+                            }
+                            else
+                            {
+                                <h3>-</h3>
+                                }
+                        }
+                    </td>
+                    <td>
+                        @{
+                        if (item.ProcessNameId != 1)
+                        {
+                        @Html.DisplayFor(modelItem => item.Device.Name)
+                        }
+                        else
+                        {
+                        <h3>-</h3>
+                        }
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Person.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Material.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Material.Unit.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-controller="ProcesDetails" asp-route-id="@item.Id">Details</a> |
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

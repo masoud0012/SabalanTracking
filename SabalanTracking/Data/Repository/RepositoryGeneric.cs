@@ -29,7 +29,7 @@ namespace SabalanTracking.Data.Repository
 
         public async Task<IQueryable<TModel>> GetAllAsync(int start = 0, int length = 50)
         {
-            var data = _dbSet.OrderBy(t => t.Id).AsQueryable();
+            var data = _dbSet.OrderByDescending(t => t.Id).AsQueryable();
             return data;
         }
 

@@ -1,19 +1,16 @@
 ﻿@model IEnumerable<SabalanTracking.Models.ProductCat>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "لیست گروه کالا";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h1>لیست گروه کالاها</h1>
+<a class="text-success" asp-action="Create"><h2>جدید</h2></a>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Category)
+                نام گروه کالا
             </th>
             <th></th>
         </tr>
@@ -25,9 +22,11 @@
                 @Html.DisplayFor(modelItem => item.Category)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="text-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    @if (item.Materials.Count==0)
+                    {
+                        <a class="text-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    }
             </td>
         </tr>
 }

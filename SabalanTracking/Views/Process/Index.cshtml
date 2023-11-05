@@ -13,31 +13,32 @@
     <thead>
         <tr>
             <th>
-               محصول تولید شده
-            </th>
-            <th>
-                سریال محصول تولید شده
-            </th>
-            <th>
                 نام فرآیند
             </th>
             <th>
-                تجهیزات مورد استفاده
+                فرمول فرآیند
+            </th>
+            <th>
+                دستگاه مورد استفاده
             </th>
             <th>
                 مسئول فرآیند
             </th>
-           
             <th>
-                تعداد 
+                کالای تولیدی
+            </th>
+            <th>
+                تعداد
             </th>
             <th>
                 واحد
             </th>
             <th>
-                زمان فرآیند
+                تاریخ فرآیند
             </th>
-         
+            <th>
+                سریال کالا
+            </th>
             <th>
                 توضیحات
             </th>
@@ -49,21 +50,38 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Material.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SN)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.ProcessName.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Device.Name)
+                    @{
+                        if (item.ProcessNameId != 1)
+                        {
+                            @Html.DisplayFor(modelItem => item.FormulaSelected.Name)
+                        }
+                        else
+                        {
+                            <h3>-</h3>
+                        }
+                    }
+                </td>
+                <td>
+                    @{
+                        if (item.ProcessNameId != 1)
+                        {
+                            @Html.DisplayFor(modelItem => item.Device.Name)
+                        }
+                        else
+                        {
+                            <h3>-</h3>
+                        }
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Person.Name)
                 </td>
-                
+                <td>
+                    @Html.DisplayFor(modelItem => item.Material.Name)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Quantity)
                 </td>
@@ -73,7 +91,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.DateTime)
                 </td>
-                
+                <td>
+                    @Html.DisplayFor(modelItem => item.SN)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>

@@ -1,25 +1,23 @@
 ﻿@model IEnumerable<SabalanTracking.Models.Device>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "تجهیزات";
 }
 
-<h1>Index</h1>
+<h1>لیست تجهیزات</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<a class="text-success" asp-action="Create"><h2>جدید</h2></a>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                نام دستگاه
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DeviceSN)
+                شماره سریال دستگاه
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+               توضیحات
             </th>
             <th></th>
         </tr>
@@ -37,8 +35,11 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="text-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    @if (item.Processs.Count==0)
+                    {
+                        <a class="text-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    }
             </td>
         </tr>
 }

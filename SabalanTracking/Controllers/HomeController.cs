@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SabalanTracking.Models;
+using SabalanTracking.ServiceContrcats;
 using System.Diagnostics;
 
 namespace SabalanTracking.Controllers
@@ -7,16 +8,18 @@ namespace SabalanTracking.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IProcess _processService;
+        public HomeController(ILogger<HomeController> logger,IProcess processService)
         {
+            _processService=processService;
             _logger = logger;
         }
         [Route("/")]
         [Route("[action]")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var list = (await _processService.GetAllAsync()).Take(5).ToList();
+            return View(list);
         }
 
         public IActionResult Privacy()

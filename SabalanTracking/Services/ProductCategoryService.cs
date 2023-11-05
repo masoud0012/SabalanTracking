@@ -1,4 +1,5 @@
-﻿using SabalanTracking.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SabalanTracking.Models;
 using SabalanTracking.Models.IRepository;
 using SabalanTracking.ServiceContrcats;
 
@@ -30,7 +31,7 @@ namespace SabalanTracking.Services
 
         public async Task<List<ProductCat>> GetAllAsync()
         {
-            var list=(await _repo.GetAllAsync()).ToList();
+            var list=(await _repo.GetAllAsync()).Include(t=>t.Materials).ToList();
             return list;
         }
 

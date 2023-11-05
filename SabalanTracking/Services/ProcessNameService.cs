@@ -1,4 +1,5 @@
-﻿using SabalanTracking.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SabalanTracking.Models;
 using SabalanTracking.Models.IRepository;
 using SabalanTracking.ServiceContrcats;
 
@@ -27,13 +28,13 @@ namespace SabalanTracking.Services
 
         public async Task<List<ProcessName>> GetAllAsync()
         {
-            var list=(await _repo.GetAllAsync()).ToList();
+            var list=(await _repo.GetAllAsync()).Include(t=>t.Processes).ToList();
             return list;
         }
 
         public async Task<ProcessName> GetById(int Id)
         {
-            var model = (await _repo.GetById(Id)).FirstOrDefault();
+            var model = (await _repo.GetById(Id)).Include(t=>t.Processes).FirstOrDefault();
             return model;
         }
 
@@ -41,6 +42,7 @@ namespace SabalanTracking.Services
         {
             var main = (await _repo.GetById(model.Id)).FirstOrDefault();
             main.Name = model.Name;
+            main.Code = model.Code;
             return model;
         }
     }

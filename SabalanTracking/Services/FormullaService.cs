@@ -30,12 +30,17 @@ namespace SabalanTracking.Services
         }
         public async Task<List<Formulla>> GetAllAsync()
         {
-            var list = (await _service.GetAllAsync()).Include(t => t.Material).ToList();
+            var list = (await _service.GetAllAsync())
+                .Include(t => t.Material)
+                .ToList();
             return list;
         }
         public async Task<Formulla> GetById(int id)
         {
-            return (await _service.GetById(id)).FirstOrDefault();
+            var model= (await _service.GetById(id))
+                .Include(t=>t.Material)
+                .FirstOrDefault();
+            return model;
         }
 
         public async Task<Formulla> GetByMaterialID(int id)
@@ -44,9 +49,11 @@ namespace SabalanTracking.Services
             return model;
         }
 
-        public Task<Formulla> update(Formulla model)
+        public async Task<Formulla> update(Formulla model)
         {
-            throw new NotImplementedException();
-        }
+            var formulla =(await _service.GetById(model.Id))
+                .Include(t=>t.formullaDetails).FirstOrDefault();
+            return model;
+                }
     }
 }

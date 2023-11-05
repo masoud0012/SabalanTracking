@@ -15,7 +15,7 @@ namespace SabalanTracking.Services
         }
         public async Task<List<Person>> GetAllAsync()
         {
-            var list = (await _repo.GetAllAsync()).ToList();
+            var list = (await _repo.GetAllAsync()).Include(t=>t.Processs).ToList();
             return list;
         }
 
@@ -27,7 +27,7 @@ namespace SabalanTracking.Services
 
         public async Task<Person> GetById(int Id)
         {
-            var person = (await _repo.GetById(Id)).FirstOrDefault();
+            var person = (await _repo.GetById(Id)).Include(t=>t.Processs).FirstOrDefault();
             return person;
         }
 
