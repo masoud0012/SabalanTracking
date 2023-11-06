@@ -7,8 +7,7 @@
             url: "/Process/getProcessByMaterialID/" + SelectMaterial.val(),
             method: "GET",
             success: function (response) {
-                console.log(response)
-                /*GetMaterials*/($.parseJSON(response));
+                ($.parseJSON(response));
             },
             error: function (xhr, status, error) {
                 console.error("Error fetching data: " + error);

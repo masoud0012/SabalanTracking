@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SabalanTracking.Models.Proces>
+﻿@model IEnumerable<Proces>
 
 @{
     ViewData["Title"] = "فرآیندها";
@@ -6,12 +6,11 @@
 
 <h1>فرآیندهای انجام شده</h1>
 
-<p>
-    <a asp-action="Create">ساخت فرآیند جدید</a>
-</p>
+<a asp-action="Create"><h2>ساخت فرآیند جدید</h2></a>
 <table class="table">
     <thead>
         <tr>
+            <th>ردیف</th>
             <th>
                 نام فرآیند
             </th>
@@ -46,9 +45,18 @@
         </tr>
     </thead>
     <tbody>
+        @{
+            int i = 1;
+        }
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+                    @i
+                    @{
+                        i++;
+                    }
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ProcessName.Name)
                 </td>

@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SabalanTracking.Models
 {
-    public class FormullaDetails:BaseModel
+    public class FormullaDetails : BaseModel
     {
-       
+
 
         [ForeignKey(nameof(Formula))]
-        public int FormullaId {  get; set; }
+        public int FormullaId { get; set; }
         public Formulla Formula { get; set; }
 
 

@@ -15,7 +15,7 @@ namespace SabalanTracking.Controllers
         private readonly IFormullaDetails _formullaDetails;
         private readonly IUnitOfWork _unitOfWork;
         public ProcessController(IProcess processService, IFormullaDetails formullaDetails
-            ,IUnitOfWork unitOfWork)
+            , IUnitOfWork unitOfWork)
         {
             _processService = processService;
             _formullaDetails = formullaDetails;
@@ -64,8 +64,7 @@ namespace SabalanTracking.Controllers
             return RedirectToAction("Index");
         }
 
-        [Route("[action]")]
-        [Route("[action]/{Id}")]
+        [Route("[action]/{id}")]
         [HttpGet]
         public async Task<string> getProcessByMaterialID(int id)
         {
@@ -75,8 +74,21 @@ namespace SabalanTracking.Controllers
             {
                 list.Add(await _processService.GetProcessByMateralId(item.MaterialId));
             }
-            return JsonConvert.SerializeObject(list);
+            return await ConvertObjToJson.ConvertToJson(list);
         }
 
+        [Route("[action]/{id}")]
+        [HttpGet]
+        public async Task<string> getProcessByFormullaID(int id)
+        {
+            var formullaDetails = await _formullaDetails.GetByFormullId(id);
+            List<Proces> list = new List<Proces>();
+            foreach (var item in formullaDetails)
+            {
+                List<Proces> tempList = await _processService.GetProcessByMateralId(item.MaterialId);
+                list.AddRange(tempList);
+            }
+            return await ConvertObjToJson.ConvertToJson(list);
+        }
     }
 }

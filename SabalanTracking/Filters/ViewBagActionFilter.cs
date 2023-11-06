@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using SabalanTracking.Models;
 using SabalanTracking.Data;
+using SabalanTracking.Models;
 
 namespace SabalanTracking.Filters
 {

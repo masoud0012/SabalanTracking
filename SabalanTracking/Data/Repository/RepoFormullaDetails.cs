@@ -19,6 +19,7 @@ namespace SabalanTracking.Data.Repository
             return await _dbSet
                 .Include(t => t.Material)
                 .Include(t => t.Formula)
+                .Include(t=>t.Material.Unit)
                 .Where(t => t.FormullaId == Id).ToListAsync();
         }
 
@@ -27,8 +28,17 @@ namespace SabalanTracking.Data.Repository
             var formulla = _context.Formulas.FirstOrDefault(t => t.ProductId == Id);
             return await _dbSet
             .Include(t => t.Material)
+            .Include(t=>t.Material.Unit)
             .Include(t => t.Formula)
             .Where(t => t.FormullaId == formulla.Id).ToListAsync();
+        }
+
+        public async Task<double> GetQuantityByFormullIdAndMaterialId(int formullId, int materialId)
+        {
+            FormullaDetails? model = await _dbSet.FirstOrDefaultAsync(t =>
+            t.FormullaId == formullId & t.MaterialId == materialId);
+
+            return model.quantity;
         }
     }
 }

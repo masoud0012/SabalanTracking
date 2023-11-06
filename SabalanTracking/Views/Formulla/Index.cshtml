@@ -1,17 +1,16 @@
-﻿@model IEnumerable<SabalanTracking.Models.Formulla>
+﻿@model IEnumerable<Formulla>
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "فرمولها";
 }
 
-<h1>Index</h1>
+<h1>لیست فرمولها</h1>
 
-<p>
-    <a asp-action="Create">تعریف فرمول جدید</a>
-</p>
+<a asp-action="Create"><h2 class="text-success">تعریف فرمول جدید</h2></a>
 <table class="table">
     <thead>
         <tr>
+            <th>ردیف</th>
             <th>
                 نام فرمول
             </th>
@@ -22,20 +21,33 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Material.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @{
+            int i = 1;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @i
+                    @{
+                        i++;
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Material.Name)
+                </td>
+                <td>
+                    <a class="text-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    @if (item.Proces.Count == 0)
+                    {
+                        <a class="text-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

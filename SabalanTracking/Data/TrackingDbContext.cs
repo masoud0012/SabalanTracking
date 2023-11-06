@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SabalanTracking.Models;
-using SabalanTracking.Models;
 using System.Reflection.Emit;
 
 namespace SabalanTracking.Data

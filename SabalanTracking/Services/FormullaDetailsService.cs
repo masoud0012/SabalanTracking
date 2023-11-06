@@ -10,9 +10,9 @@ namespace SabalanTracking.Services
     {
         private readonly IRepoFormullaDetails _repo;
         private readonly IUnitOfWork _unitOfWork;
-        public FormullaDetailsService(IRepoFormullaDetails repo,IUnitOfWork unitOfWork)
+        public FormullaDetailsService(IRepoFormullaDetails repo, IUnitOfWork unitOfWork)
         {
-            _repo=repo;
+            _repo = repo;
             _unitOfWork = unitOfWork;
         }
         public async Task<FormullaDetails> Create(FormullaDetails model)
@@ -21,24 +21,26 @@ namespace SabalanTracking.Services
             await _unitOfWork.SaveChanges();
             return model;
         }
-
         public Task<bool> delete(int Id)
         {
             throw new NotImplementedException();
         }
-
         public async Task<List<FormullaDetails>> GetAllAsync()
         {
-            var list=(await _repo.GetAllAsync())
-                .Include(t=>t.Formula)
-                .Include(t=>t.Material)
+            var list = (await _repo.GetAllAsync())
+                .Include(t => t.Formula)
+                .Include(t => t.Material)
+                .Include(t => t.Material.Unit)
                 .ToList();
             return list;
         }
-
         public async Task<FormullaDetails> GetById(int Id)
         {
-            var detail = (await _repo.GetById(Id)).FirstOrDefault();
+            var detail = (await _repo.GetById(Id))
+                 .Include(t => t.Formula)
+                .Include(t => t.Material)
+                .Include(t => t.Material.Unit)
+                .FirstOrDefault();
             return detail;
         }
         public async Task<List<FormullaDetails>> GetByFormullId(int Id)
@@ -55,6 +57,12 @@ namespace SabalanTracking.Services
         public Task<FormullaDetails> update(FormullaDetails model)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<double> GetQuantityByFormullIdAndMaterialId(int formullId, int MaterialId)
+        {
+            var quantity=await _repo.GetQuantityByFormullIdAndMaterialId(formullId, MaterialId);
+            return quantity;
         }
     }
 }

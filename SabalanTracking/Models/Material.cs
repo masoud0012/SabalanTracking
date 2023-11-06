@@ -5,9 +5,9 @@ using System.Text.Json.Serialization;
 
 namespace SabalanTracking.Models
 {
-    public class Material :BaseModel
+    public class Material : BaseModel
     {
-       
+
         [Required]
         [ForeignKey("ProductCat")]
         public int CatId { get; set; }

@@ -1,7 +1,5 @@
 ﻿$(document).ready(function () {
     var firstRow = $("#details tbody tr:first option:not(:first)");
-    
-    console.log(firstRow);
     $("#MaterialId").on("change", function () {
         var SelectMaterial = $("#MaterialId")
         $.ajax({
@@ -16,7 +14,7 @@
             }
         });
         //Get All SN based on selected material
-        $.ajax({
+       /* $.ajax({
             url: "/FeedList/GetAllSNByMaterialID/" + SelectMaterial.val(),
             method: "GET",
             success: function (response) {
@@ -25,9 +23,9 @@
             error: function (xhr, status, error) {
                 console.error("Error fetching data: " + error);
             }
-        });
+        });*/
     });
-    function FeedSelectTag(list) {
+/*    function FeedSelectTag(list) {
         var rows = $("#details tbody tr select");
         rows.find("option:gt(0)").remove()
 
@@ -35,9 +33,9 @@
             $.each(i, function (item, index) {
                 rows.append($('<option>', {
                     value: index.SN,
-                    text: "Material:" + index.Material.Name + "||" + "   SN: " + index.SN +"  ||Quantity in stock: "+ index.Quantity
+                    text: "متریال:" + index.Material.Name + "||" + "   شماره سریال: " + index.SN + "  ||مانده در انبار: " + index.Quantity + " " + index.Material.Unit.Name
                 }));
             });
         });
     }
-})
+*/})

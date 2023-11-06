@@ -9,7 +9,7 @@ namespace SabalanTracking.Controllers
     {
         private readonly IFormullaDetails _service;
         private readonly IFormulla _formullService;
-        public FormullaDetailsController(IFormullaDetails service,IFormulla formulla)
+        public FormullaDetailsController(IFormullaDetails service, IFormulla formulla)
         {
             _service = service;
             _formullService = formulla;
@@ -23,9 +23,10 @@ namespace SabalanTracking.Controllers
         [Route("[action]/{id}")]
         public async Task<List<FormullaDetails>> GetSNsByFormullaID(int id)
         {
-            var formull=await _formullService.GetByMaterialID(id);
-            var list=await _service.GetByFormullId(formull.Id);
+            var formull = await _formullService.GetByMaterialID(id);
+            var list = await _service.GetByFormullId(formull.Id);
             return list;
         }
+
     }
 }

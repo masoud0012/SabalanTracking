@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SabalanTracking.Data;
 using SabalanTracking.Models;
 using SabalanTracking.Models.IRepository;
 using SabalanTracking.ServiceContrcats;

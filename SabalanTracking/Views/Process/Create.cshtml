@@ -1,7 +1,7 @@
-﻿@model SabalanTracking.Models.Proces
+﻿@model Proces
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "فرآیند جدید";
 }
 <hr />
 <div class="col-11 mx-ato pt-0 p-0">
@@ -32,7 +32,7 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="FormullaId" class="control-label">فرمول مورداستفاده</label>
-                        <select asp-for="FormullaId" class="form-control" asp-items="ViewBag.Furmulla">
+                        <select asp-for="FormullaId" class="form-control" asp-items="ViewBag.Furmulla" onchange="GetProcessListByFormullaId(this)">
                             <option>فرمول مورد استفاده</option>
                         </select>
                     </div>
@@ -97,7 +97,7 @@
                             {
                                 <tr>
                                     <td>
-                                        <select asp-items="@ViewBag.Proces2" asp-for="@Model.ProcessDetails[i].Product_SN" onchange="GetQauntityByFormull(this)">
+                                        <select asp-items="@ViewBag.Proces2" asp-for="@Model.ProcessDetails[i].Product_SN" onchange="GetQauntity(this)">
                                             <option>انتخاب سریال نامیر متریال جهت تولید</option>
                                         </select>
                                     </td>
@@ -137,7 +137,10 @@
     }
     <script src="~/js/AddRemoveRows.js"> </script>
     <script src="~/js/CheckPurchaseProcess.js"> </script>
+    <script src="~/js/FeedSelectTagByProcessList.js"> </script>
     <script src="~/js/GetListByMaterialId.js"></script>
     <script src="~/js/GetFormulls.js"></script>
+    <script src="~/js/GetProcessListByFormullaId.js"></script>
+    <script src="~/js/GetQuantity.js"></script>
 
 }

@@ -12,6 +12,12 @@ namespace SabalanTracking.Data.Repository
             _dbSet = dbContext.Set<Proces>();
         }
 
+        public async Task<IQueryable<Proces>> GetProcessByFormullaId(int Id)
+        {
+            var list = _dbSet.Where(t => t.FormullaId == Id).AsQueryable();
+            return list;
+        }
+
         public async Task<IQueryable<Proces>> GetProcessByMaterialId(int Id)
         {
             var list = _dbSet.Where(t => t.MaterialId == Id).AsQueryable();
@@ -26,10 +32,14 @@ namespace SabalanTracking.Data.Repository
 
         public async Task<Proces> GetProcessBySN(string SN)
         {
-            var model = await _dbSet.Include(p => p.Material).Include(p => p.Device)
-                           .Include(p => p.Material.Unit)
-                           .Include(p => p.ProcessName).Include(p => p.Person)
-                           .Where(t => t.SN == SN).FirstOrDefaultAsync();
+            var model = await _dbSet
+                .Include(p => p.Material)
+                .Include(p => p.Device)
+                .Include(p => p.Material.Unit)
+                .Include(p => p.ProcessName)
+                .Include(p => p.Person)
+                .Include(p=>p.FormulaSelected)
+                .FirstOrDefaultAsync(t => t.SN == SN);
             return model;
         }
     }

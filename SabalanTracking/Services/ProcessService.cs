@@ -30,29 +30,52 @@ namespace SabalanTracking.Services
         public async Task<List<Proces>> GetAllAsync()
         {
             var list = (await _service.GetAllAsync()).
-                Include(p => p.Material).Include(p => p.Device)
-                          .Include(p => p.Material.Unit)
-                          .Include(p => p.ProcessName)
-                          .Include(p => p.Person).ToList();
+                Include(p => p.Material)
+                .Include(p => p.Device)
+                .Include(p => p.Material.Unit)
+                .Include(p => p.ProcessName)
+                .Include(p => p.Person)
+                .Include(p=>p.FormulaSelected)
+                .ToList();
             return list;
         }
 
         public async Task<Proces> GetById(int Id)
         {
             var proces = (await _service.GetById(Id))
-                    .Include(p => p.Material).Include(p => p.Device)
-                    .Include(p => p.ProcessName).Include(p => p.Person)
+                    .Include(p => p.Material)
+                    .Include(p => p.Device)
+                    .Include(p => p.ProcessName)
+                    .Include(p => p.Person)
                     .Include(p => p.Material.Unit)
+                    .Include(p=>p.FormulaSelected)
                     .FirstOrDefault(t => t.Id == Id);
             return proces;
+        }
+
+        public async Task<List<Proces>> GetProcessByFormullaId(int Id)
+        {
+            List<Proces>? list = (await _service.GetProcessByFormullaId(Id))
+               .Include(p => p.Material)
+               .Include(p => p.Device)
+               .Include(p => p.Material.Unit)
+               .Include(p => p.ProcessName)
+               .Include(p => p.Person)
+               .Include(p => p.FormulaSelected)
+               .ToList();
+            return list;
         }
 
         public async Task<List<Proces>> GetProcessByMateralId(int Id)
         {
             List<Proces>? list = (await _service.GetProcessByMaterialId(Id))
-                .Include(p => p.Material).Include(p => p.Device)
-                          .Include(p => p.Material.Unit)
-                          .Include(p => p.ProcessName).Include(p => p.Person).ToList();
+                .Include(p => p.Material)
+                .Include(p => p.Device)
+                .Include(p => p.Material.Unit)
+                .Include(p => p.ProcessName)
+                .Include(p => p.Person)
+                .Include(p=>p.FormulaSelected)
+                .ToList();
             return list;
         }
 
@@ -63,7 +86,7 @@ namespace SabalanTracking.Services
 
         public async Task<Proces> GetProcessBySN(string SN)
         {
-            var process =await _service.GetProcessBySN(SN);
+            var process = await _service.GetProcessBySN(SN);
             return process;
         }
 

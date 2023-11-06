@@ -4,13 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SabalanTracking.Models
 {
-    public class ProcessDetaile:BaseModel
+    public class ProcessDetaile : BaseModel
     {
         public ProcessDetaile()
         {
 
         }
-      
+
         [Required]
         [ForeignKey("Proces")]
         public int ProcessId { get; set; }

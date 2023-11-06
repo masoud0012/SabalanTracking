@@ -5,10 +5,10 @@ using System.Text.Json.Serialization;
 
 namespace SabalanTracking.Models
 {
-    public class Proces:BaseModel
+    public class Proces : BaseModel
 
     {
-       
+
         [Required]
         [ForeignKey("ProcessName")]
         public int ProcessNameId { get; set; }
@@ -16,7 +16,7 @@ namespace SabalanTracking.Models
 
         [ForeignKey(nameof(FormulaSelected))]
         public int? FormullaId { get; set; }
-        public virtual Formulla? FormulaSelected { get; set;}
+        public virtual Formulla? FormulaSelected { get; set; }
 
         [Required]
         [ForeignKey("Device")]
@@ -44,19 +44,19 @@ namespace SabalanTracking.Models
         public string SN { get; set; } = string.Empty;
         public string? Description { get; set; } = string.Empty;
         [JsonIgnore]
-        public virtual List<ProcessDetaile>? ProcessDetails { get; set; }=new List<ProcessDetaile>();
+        public virtual List<ProcessDetaile>? ProcessDetails { get; set; } = new List<ProcessDetaile>();
     }
     public static class DetailsExtension
     {
         public static ProcessDetailsResponse ToDetailsResponse(
-            this Proces proces, ProcessDetaile details,double totalQty)
+            this Proces proces, ProcessDetaile details, double totalQty)
         {
             return new ProcessDetailsResponse()
             {
-             
+
                 Consumed = totalQty * details.QntyPerPc,
-                proces=proces,
-                detaile=details
+                proces = proces,
+                detaile = details
             };
         }
     }

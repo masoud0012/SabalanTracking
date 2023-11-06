@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SabalanTracking.Models.IRepository;
-using SabalanTracking.Models;
 using SabalanTracking.ServiceContrcats;
+using SabalanTracking.Models;
 
 namespace SabalanTracking.Controllers
 {
