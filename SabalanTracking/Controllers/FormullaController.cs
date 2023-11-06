@@ -2,6 +2,7 @@
 using SabalanTracking.Models;
 using SabalanTracking.Filters;
 using SabalanTracking.ServiceContrcats;
+using SabalanTracking.Models.IRepository;
 
 namespace SabalanTracking.Controllers
 {
@@ -11,10 +12,14 @@ namespace SabalanTracking.Controllers
     {
         private readonly IFormulla _formullaService;
         private readonly IFormullaDetails _formullaDetailsService;
-        public FormullaController(IFormulla formullaService, IFormullaDetails formullaDetailsService)
+        private readonly IUnitOfWork _unitOfWork;
+        public FormullaController(IFormulla formullaService,
+            IFormullaDetails formullaDetailsService,
+            IUnitOfWork unitOfWork)
         {
             _formullaService = formullaService;
             _formullaDetailsService = formullaDetailsService;
+            _unitOfWork = unitOfWork;
         }
         [Route("[action]")]
         public async Task<IActionResult> Index()
@@ -41,6 +46,7 @@ namespace SabalanTracking.Controllers
                 return null;
             }
             await _formullaService.Create(formulla);
+            _unitOfWork.SaveChanges();
             return RedirectToAction("Index");
         }
         [HttpGet]
@@ -49,6 +55,23 @@ namespace SabalanTracking.Controllers
         {
           var detail=  await _formullaDetailsService.GetByFormullId(id);
             return View(detail);
+        }
+
+        [HttpGet]
+        [Route("[action]/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var model =await _formullaService.GetById(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        [Route("[action]/{id}")]
+        public async Task<IActionResult> Delete(Formulla formulla)
+        {
+            await _formullaService.delete(formulla.Id);
+            await _unitOfWork.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

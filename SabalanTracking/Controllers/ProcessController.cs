@@ -64,6 +64,23 @@ namespace SabalanTracking.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        [Route("[action]/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var model = await _processService.GetById(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Route("[action]/{id}")]
+        public async Task<IActionResult> Delete(Material model)
+        {
+            await _processService.delete(model.Id);
+            await _unitOfWork.SaveChanges();
+            return RedirectToAction("Index");
+        }
         [Route("[action]/{id}")]
         [HttpGet]
         public async Task<string> getProcessByMaterialID(int id)
