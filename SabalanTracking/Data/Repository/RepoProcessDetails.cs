@@ -20,9 +20,9 @@ namespace SabalanTracking.Data.Repository
             return detail;
         }
 
-        public async Task<ProcessDetaile?> GetDetailsBySN(string SN)
+        public async Task<List<ProcessDetaile>?> GetDetailsBySN(string SN)
         {
-            var detail =await _dbSet.Where(t => t.Product_SN == SN).FirstOrDefaultAsync();
+            List<ProcessDetaile> detail = _dbSet.Where(t => t.Product_SN == SN).ToList();
             return detail;
         }
     }

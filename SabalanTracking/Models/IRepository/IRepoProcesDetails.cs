@@ -3,7 +3,7 @@
     public interface IRepoProcesDetails:IRepoGeneric<ProcessDetaile>
     {
         Task<IQueryable<ProcessDetaile?>> GetByProcessId(int id);
-        Task<ProcessDetaile?> GetDetailsBySN(string SN);
+        Task<List<ProcessDetaile>?> GetDetailsBySN(string SN);
 
     }
 }

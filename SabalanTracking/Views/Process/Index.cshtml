@@ -3,8 +3,19 @@
 @{
     ViewData["Title"] = "فرآیندها";
 }
+@{
+    if (TempData["message"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>توجه!</strong> @ViewBag.Message
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+    }
+}
 
 <h1>فرآیندهای انجام شده</h1>
+
 
 <a asp-action="Create"><h2>ساخت فرآیند جدید</h2></a>
 <table class="table">

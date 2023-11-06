@@ -14,16 +14,25 @@ namespace SabalanTracking.Controllers
         private readonly IProcess _processService;
         private readonly IFormullaDetails _formullaDetails;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IProcessDetails _detailsService;
         public ProcessController(IProcess processService, IFormullaDetails formullaDetails
-            , IUnitOfWork unitOfWork)
+            , IUnitOfWork unitOfWork,IProcessDetails DetailsService)
         {
             _processService = processService;
+            _detailsService = DetailsService;
             _formullaDetails = formullaDetails;
             _unitOfWork = unitOfWork;
         }
         [Route("[action]")]
         public async Task<IActionResult> Index()
         {
+            string message = TempData["message"] as string;
+
+            if (message != null)
+            {
+                ViewBag.Message = message;
+            }
+
             List<Proces> processes = (await _processService.GetAllAsync());
             return View(processes);
         }
@@ -69,8 +78,13 @@ namespace SabalanTracking.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var model = await _processService.GetById(id);
-
-            return View(model);
+            List<ProcessDetaile> used =await _detailsService.GetDetailsBySN(model.SN);
+            if (used.Count ==0)
+            {
+                return View(model);
+            }
+            TempData["message"] = "این فرآیند در فرایندهای دیگر استفاده شده و قابل حدف شدن نیست";
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

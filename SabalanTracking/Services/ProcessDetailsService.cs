@@ -48,7 +48,7 @@ namespace SabalanTracking.Services
                 .Where(t => t.ProcessId == id).ToList();
             return details;
         }
-        public async Task<ProcessDetaile> GetDetailsBySN(string SN)
+        public async Task<List<ProcessDetaile>?> GetDetailsBySN(string SN)
         {
             var process = await _repo.GetDetailsBySN(SN);
             return process;
