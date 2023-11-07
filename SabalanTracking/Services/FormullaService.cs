@@ -43,7 +43,7 @@ namespace SabalanTracking.Services
             return model;
         }
 
-        public async Task<Formulla> GetByMaterialID(int id)
+        public async Task<Formulla?> GetByMaterialID(int id)
         {
             var model = await _service.GetByMaterialId(id);
             return model;

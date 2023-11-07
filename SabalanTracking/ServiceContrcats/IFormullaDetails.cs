@@ -8,7 +8,5 @@ namespace SabalanTracking.ServiceContrcats
         public Task<List<FormullaDetails>> GetByFormullId(int Id);
 
         Task<double> GetQuantityByFormullIdAndMaterialId(int formullId, int MaterialId);
-
-
     }
 }

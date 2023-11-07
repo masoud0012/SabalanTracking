@@ -7,7 +7,7 @@ using SabalanTracking.Models;
 
 namespace SabalanTracking.Filters
 {
-    public class ViewBagActionFilter : IAsyncActionFilter
+    public class ViewBagActionFilter //: IAsyncActionFilter
     {
         private readonly TrackingDbContext _dbContext;
         private List<Person> _people;
@@ -54,12 +54,12 @@ namespace SabalanTracking.Filters
 
             ((Controller)context.Controller).ViewBag.Proces2 = _processes.Select(t =>
             new SelectListItem() { Value = t.SN, Text = "||نام متریال:" + t.Material.Name + "||شماره سریال=" + t.SN + " ||  تعداد=" + t.Quantity });
-/*            ((Controller)context.Controller).ViewBag.Process = new SelectList(_processes.Select(t => new SelectListItem
+            ((Controller)context.Controller).ViewBag.Process = new SelectList(_processes.Select(t => new SelectListItem
             {
                 Value = t.SN,
                 Text = "||نام متریال:" + t.Material.Name + "||شماره سریال=" + t.SN + " ||  تعداد=" + t.Quantity
             }),
-       "Value", "Text");*/
+       "Value", "Text");
             ((Controller)context.Controller).ViewBag.MaterialList = new SelectList(
                 _materials.Select(t => new SelectListItem
                 {

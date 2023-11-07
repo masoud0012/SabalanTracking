@@ -14,11 +14,11 @@
     }
 }
 
-<h1>فرآیندهای انجام شده</h1>
+<h2 class="text-center">فرآیندهای انجام شده</h2>
 
 
-<a asp-action="Create"><h2>ساخت فرآیند جدید</h2></a>
-<table class="table">
+<a asp-action="Create"><h3 class="text-danger">ساخت فرآیند جدید</h3></a>
+<table class="table table-striped table-hover">
     <thead>
         <tr>
             <th>ردیف</th>
@@ -117,11 +117,11 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-action="Index" asp-controller="ProcesDetails" asp-route-id="@item.Id">Details</a> |
+                    <a class="text-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a class="text-info" asp-action="Details" asp-action="Index" asp-controller="ProcesDetails" asp-route-id="@item.Id">Details</a> |
                     @if (item.ProcessDetails.Count == 0)
                     {
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <a class="text-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                     }
                 </td>
             </tr>

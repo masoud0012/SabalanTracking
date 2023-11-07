@@ -1,17 +1,18 @@
-﻿/*$(document).ready(function () {
-    var table = document.getElementById('details');
-    var rows = table.getElementsByTagName('tr');
+﻿$(document).ready(function () {
+    //var firstRow = $("#details tbody tr:first option:not(:first)");
     $("#MaterialId").on("change", function () {
         var SelectMaterial = $("#MaterialId")
         $.ajax({
-            url: "/Process/getProcessByMaterialID/" + SelectMaterial.val(),
+            url: "/Material/GetById/" + SelectMaterial.val(),
             method: "GET",
             success: function (response) {
-                ($.parseJSON(response));
+                var material = $.parseJSON(response)
+                $("#UnitOfMaterial").text(material.Unit.Name)
             },
             error: function (xhr, status, error) {
                 console.error("Error fetching data: " + error);
             }
         });
+
     });
-})*/
+})

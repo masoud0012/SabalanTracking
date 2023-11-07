@@ -1,9 +1,8 @@
-function GetQauntityByFormull(item) {
-    var SN = ($(item).val())
+function GetFormullas(item) {
+    var materialId = ($(item).val())
     var formulla = $("#FormullaId").val()
-    console.log(formulla)
     $.ajax({
-        url: "/FeedList/GetFormullaBySN/" + SN,
+        url: "/Formulla/GetByMaterialId/" + materialId,
         method: "GET",
         success: function (response) {
             console.log($.parseJSON(response))

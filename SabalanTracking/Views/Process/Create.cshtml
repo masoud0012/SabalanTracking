@@ -15,7 +15,7 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="MaterialId" class="control-label">محصول تولیدی</label>
-                        <select asp-for="MaterialId" class="form-control" asp-items="ViewBag.Materials">
+                        <select asp-for="MaterialId" class="form-control" asp-items="ViewBag.Materials" onchange="GetFormullas(this)">
                             <option>نام محصول تولیدی</option>
                         </select>
                     </div>
@@ -85,7 +85,7 @@
                 </div>
                 <div class="col-md-12">
 
-                    <table class="table table-striped table-sm" id="details">
+                    <table class="table table-striped" id="details">
                         <thead>
                             <tr>
                                 <th>سریال مواد لازم جهت ساخت محصول</th>
@@ -97,7 +97,7 @@
                             {
                                 <tr>
                                     <td>
-                                        <select asp-items="@ViewBag.Proces2" asp-for="@Model.ProcessDetails[i].Product_SN" onchange="GetQauntity(this)">
+                                        <select asp-items="@ViewBag.Proces" asp-for="@Model.ProcessDetails[i].Product_SN" onchange="GetQauntity(this)">
                                             <option>انتخاب سریال نامیر متریال جهت تولید</option>
                                         </select>
                                     </td>
@@ -137,8 +137,7 @@
     }
     <script src="~/js/AddRemoveRows.js"> </script>
     <script src="~/js/CheckPurchaseProcess.js"> </script>
-    <script src="~/js/FeedSelectTagByProcessList.js"> </script>
-    <script src="~/js/GetListByMaterialId.js"></script>
+    <script src="~/js/GetUnit.js"></script>
     <script src="~/js/GetFormulls.js"></script>
     <script src="~/js/GetProcessListByFormullaId.js"></script>
     <script src="~/js/GetQuantity.js"></script>

@@ -2,7 +2,6 @@
 using SabalanTracking.Models;
 using SabalanTracking.Filters;
 using SabalanTracking.ServiceContrcats;
-using Newtonsoft.Json;
 using SabalanTracking.Helper;
 using SabalanTracking.Models.IRepository;
 
@@ -39,7 +38,12 @@ namespace SabalanTracking.Controllers
 
         [Route("[action]")]
         [HttpGet]
-        [TypeFilter(typeof(ViewBagActionFilter))]
+        [TypeFilter(typeof(ViewBagDevicesActionFilter))]
+        [TypeFilter(typeof(ViewBagFurmullaActionFilter))]
+        [TypeFilter(typeof(ViewBagMaterialsActionFilter))]
+        [TypeFilter(typeof(ViewBagPeopleActionFilter))]
+        [TypeFilter(typeof(ViewBagProcesActionFilter))]
+        [TypeFilter(typeof(ViewBagProcessNamesActionFilter))]
         public async Task<IActionResult> Create()
         {
 

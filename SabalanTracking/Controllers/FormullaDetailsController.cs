@@ -18,14 +18,13 @@ namespace SabalanTracking.Controllers
         {
             return View();
         }
-        [HttpGet]
+/*        [HttpGet]
         [Route("[action]/{id}")]
         public async Task<List<FormullaDetails>> GetSNsByFormullaID(int id)
         {
             var formull = await _formullService.GetByMaterialID(id);
             var list = await _service.GetByFormullId(formull.Id);
             return list;
-        }
-
+        }*/
     }
 }

@@ -3,11 +3,12 @@ using SabalanTracking.Models;
 using SabalanTracking.Filters;
 using SabalanTracking.ServiceContrcats;
 using SabalanTracking.Models.IRepository;
+using SabalanTracking.Helper;
 
 namespace SabalanTracking.Controllers
 {
     [Route("[Controller]")]
-    [TypeFilter(typeof(ViewBagActionFilter))]
+    [TypeFilter(typeof(ViewBagFurmullaActionFilter))]
     public class FormullaController : Controller
     {
         private readonly IFormulla _formullaService;
@@ -72,6 +73,14 @@ namespace SabalanTracking.Controllers
             await _formullaService.delete(formulla.Id);
             await _unitOfWork.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        [Route("[action]/{id}")]
+        public async Task<string> GetByMaterialId(int id)
+        {
+            var list=await _formullaService.GetByMaterialID(id);
+            return await ConvertObjToJson.ConvertToJson(list);
         }
     }
 }

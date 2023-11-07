@@ -1,37 +1,38 @@
 ﻿@model IEnumerable<Unit>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "واحد کالا";
 }
 
-<h1>Index</h1>
+<h2>واحد کالا</h2>
 
-<h2>
-    <a class="text-success" asp-action="Create">جدید</a>
-</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-               نام واحد
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a class="text-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    @if (item.Materials.Count==0)
-                    {
-                        <a class="text-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    }
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<a class="text-success" asp-action="Create"><h3>جدید</h3></a>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-sm">
+        <thead>
+            <tr>
+                <th>
+                    نام واحد
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        <a class="text-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        @if (item.Materials.Count == 0)
+                        {
+                            <a class="text-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
