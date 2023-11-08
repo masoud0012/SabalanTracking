@@ -40,8 +40,10 @@ namespace SabalanTracking.Services
         public async Task<Material> update(Material model)
         {
             var main = (await _repo.GetById(model.Id)).FirstOrDefault();
-            main.ProductCat = model.ProductCat;
+            main.CatId = model.CatId;
             main.Name = model.Name;
+            main.UnitId = model.UnitId;
+            main.MaterialCode = model.MaterialCode;
             return model;
         }
     }

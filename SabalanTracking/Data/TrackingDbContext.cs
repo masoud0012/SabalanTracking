@@ -154,7 +154,6 @@ namespace SabalanTracking.Data
             }
 
             #endregion*/
-
         }
 
     }

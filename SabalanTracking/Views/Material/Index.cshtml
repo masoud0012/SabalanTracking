@@ -17,6 +17,9 @@
                 گروه کالا
             </th>
             <th>
+                کد کالا
+            </th>
+            <th>
                 واحد کالا
             </th>
             <th></th>
@@ -31,6 +34,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ProductCat.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaterialCode)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Unit.Name)

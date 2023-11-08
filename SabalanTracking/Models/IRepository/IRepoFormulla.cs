@@ -2,6 +2,6 @@
 {
     public interface IRepoFormulla:IRepoGeneric<Formulla>
     {
-        public Task<Formulla?> GetByMaterialId(int id);
+        public Task<List<Formulla>?> GetByMaterialId(int id);
     }
 }

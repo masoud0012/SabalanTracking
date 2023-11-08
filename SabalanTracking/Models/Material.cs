@@ -13,6 +13,7 @@ namespace SabalanTracking.Models
         public int CatId { get; set; }
         public virtual ProductCat ProductCat { get; set; }
 
+        public string MaterialCode { get; set; } = "PR00.0000";
 
         [ForeignKey(nameof(Unit))]
         public int? UnitId { get; set; }

@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using SabalanTracking.Helper;
-using SabalanTracking.Models;
+
 using SabalanTracking.ServiceContrcats;
 
 namespace SabalanTracking.Controllers
@@ -9,17 +7,14 @@ namespace SabalanTracking.Controllers
     [Route("[Controller]")]
     public class FeedListController : Controller
     {
-        private readonly IFormulla _fService;
         private readonly IFormullaDetails _fdService;
         private readonly IProcess _pService;
-        public FeedListController(IFormulla fService, IFormullaDetails dService
-            , IProcess pService)
+        public FeedListController(IFormullaDetails dService, IProcess pService)
         {
-            _fService = fService;
             _fdService = dService;
             _pService = pService;
         }
-        [HttpGet]
+       /* [HttpGet]
         [Route("[action]/{id}")]
         public async Task<string> GetAllSNByMaterialID(int id)
         {
@@ -46,7 +41,7 @@ namespace SabalanTracking.Controllers
             Proces proces = await _pService.GetProcessBySN(SN);
             Formulla formulla = await _fService.GetByMaterialID(proces.MaterialId);
             return await ConvertObjToJson.ConvertToJson(formulla);
-        }
+        }*/
 
         [HttpGet]
         [Route("[action]/{formullId}/{SN}")]

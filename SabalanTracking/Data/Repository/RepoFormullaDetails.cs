@@ -19,6 +19,7 @@ namespace SabalanTracking.Data.Repository
             return await _dbSet
                 .Include(t => t.Material)
                 .Include(t => t.Formula)
+                .Include(t => t.Formula)
                 .Include(t=>t.Material.Unit)
                 .Where(t => t.FormullaId == Id).ToListAsync();
         }

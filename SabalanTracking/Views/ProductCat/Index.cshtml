@@ -9,26 +9,27 @@
 <table class="table table-sm table-hover">
     <thead>
         <tr>
-            <th>
-                نام گروه کالا
-            </th>
+            <th>نام گروه کالا</th>
+            <th>سمبل گروه</th>
+            <th>کد گروه کالا</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                <a class="text-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    @if (item.Materials.Count==0)
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Category)</td>
+                <td>@Html.DisplayFor(modelItem => item.Symbol)</td>
+                <td>@Html.DisplayFor(modelItem => item.CategoryCode)</td>
+                <td>
+                    <a class="text-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    @if (item.Materials.Count == 0)
                     {
                         <a class="text-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                     }
-            </td>
-        </tr>
-}
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

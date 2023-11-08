@@ -12,11 +12,11 @@ namespace SabalanTracking.Data.Repository
             _dbset=dbContext.Set<Formulla>();   
         }
 
-        public async Task<Formulla> GetByMaterialId(int id)
+        public async Task<List<Formulla>?> GetByMaterialId(int id)
         {
             var model=await _dbset
                 .Include(t=>t.formullaDetails)
-                .FirstOrDefaultAsync(t=>t.ProductId==id);
+                .Where(t=>t.ProductId==id).ToListAsync();
             return model;
         }
     }

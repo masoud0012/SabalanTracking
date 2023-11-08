@@ -45,6 +45,8 @@ namespace SabalanTracking.Services
         {
             var mainModel = (await _repo.GetById(model.Id)).FirstOrDefault();
             mainModel.Category = model.Category;
+            mainModel.CategoryCode = model.CategoryCode;
+            mainModel.Symbol = model.Symbol;
             return model;
         }
     }

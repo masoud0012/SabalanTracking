@@ -2,18 +2,18 @@
 
 @{
     ViewData["Title"] = "جزئیات فرمول";
+    var formulla = (Formulla)ViewBag.Prodct;
 }
 
-<h1>Details</h1>
 <h3>
-    <span>متریال لازم جهت تولید</span>
-    <span>@Model.FirstOrDefault().Formula.Material.Name</span>
+    <span>متریال لازم جهت تولید </span>
+    <span class="text-success">@formulla.Material.Name</span>
 </h3>
 
 <p>
     <a asp-controller="Formulla" asp-action="Index">بازگشت</a>
 </p>
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>
@@ -27,7 +27,7 @@
             </th>
             <th>
                 <span>تعداد لازم جهت تولید هر </span>
-                
+
                 <span><span>@Model.FirstOrDefault().Formula.Material.Name</span></span>
             </th>
             <th>واحد</th>
@@ -54,10 +54,10 @@
                     @Html.DisplayFor(modelItem => item.Material.Unit.Name)
 
                 </td>
-@*                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td> *@
+                @*                 <td>
+            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td> *@
             </tr>
         }
     </tbody>

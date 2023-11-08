@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SabalanTracking.Data;
 
@@ -11,9 +12,11 @@ using SabalanTracking.Data;
 namespace SabalanTracking.Migrations
 {
     [DbContext(typeof(TrackingDbContext))]
-    partial class TrackingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231108021336_SetCodes")]
+    partial class SetCodes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -573,10 +576,6 @@ namespace SabalanTracking.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Symbol")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("ProductCats", (string)null);
@@ -586,22 +585,19 @@ namespace SabalanTracking.Migrations
                         {
                             Id = 1,
                             Category = "RawMaterial",
-                            CategoryCode = "C00.0000",
-                            Symbol = "S"
+                            CategoryCode = "C00.0000"
                         },
                         new
                         {
                             Id = 2,
                             Category = "FinalProduct",
-                            CategoryCode = "C00.0000",
-                            Symbol = "S"
+                            CategoryCode = "C00.0000"
                         },
                         new
                         {
                             Id = 3,
                             Category = "Semi Final Prodct",
-                            CategoryCode = "C00.0000",
-                            Symbol = "S"
+                            CategoryCode = "C00.0000"
                         });
                 });
 

@@ -54,7 +54,8 @@ namespace SabalanTracking.Controllers
         [Route("[action]/{id}")]
         public async Task<IActionResult> Details(int id)
         {
-          var detail=  await _formullaDetailsService.GetByFormullId(id);
+            var detail = await _formullaDetailsService.GetByFormullId(id);
+            ViewBag.Prodct = await _formullaService.GetById(id);
             return View(detail);
         }
 
@@ -62,7 +63,7 @@ namespace SabalanTracking.Controllers
         [Route("[action]/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var model =await _formullaService.GetById(id);
+            var model = await _formullaService.GetById(id);
             return View(model);
         }
 
@@ -79,7 +80,7 @@ namespace SabalanTracking.Controllers
         [Route("[action]/{id}")]
         public async Task<string> GetByMaterialId(int id)
         {
-            var list=await _formullaService.GetByMaterialID(id);
+            var list = await _formullaService.GetByMaterialID(id);
             return await ConvertObjToJson.ConvertToJson(list);
         }
     }
