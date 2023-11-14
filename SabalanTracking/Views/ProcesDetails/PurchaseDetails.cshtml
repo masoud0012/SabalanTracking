@@ -4,7 +4,7 @@
     ViewData["Title"] = "PurchaseDetails";
 }
 <a asp-action="Index" asp-controller="Process" >بازگشت </a>
-<h3>جزوئیات خرید</h3>
+<h3>جزئیات خرید</h3>
 <p>
     <span>&nbsp @Model.Quantity</span>
     <span>
@@ -44,7 +44,7 @@
                 @Html.DisplayFor(modelItem => modelItem.Person.Name)
             </td>
             <td>
-                <span> @Html.DisplayFor(modelItem => modelItem.Material.Name)</span>
+               @Html.DisplayFor(modelItem => modelItem.Material.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => modelItem.Quantity)

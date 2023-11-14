@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SabalanTracking.Models;
-using System.Reflection.Emit;
+using SabalanTracking.Models.IdentityEntities;
 
 namespace SabalanTracking.Data
 {
-    public class TrackingDbContext : DbContext
+    public class TrackingDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,Guid>
     {
         public TrackingDbContext(DbContextOptions<TrackingDbContext> options) : base(options)
         {
@@ -19,7 +20,7 @@ namespace SabalanTracking.Data
         public virtual DbSet<ProductCat> ProductCats { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<Formulla> Formulas { get; set; }
-        public virtual DbSet<FormullaDetails> FormullaDetails {get;set;}
+        public virtual DbSet<FormullaDetails> FormullaDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -73,7 +74,7 @@ namespace SabalanTracking.Data
                 new ProcessName(){Id=4,Name="تزریق پلاستیک"},
                 new ProcessName(){Id=5,Name="جوش التراسونیک"},
                 new ProcessName(){Id=6,Name="بسته بندی"}
-              
+
 
             };
             if (processNames != null)

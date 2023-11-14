@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ApplicationRole>
+
+@{
+    ViewData["Title"] = "Roles";
+}
+
+<h1>لیست نقشها</h1>
+
+<a class="text-success" asp-action="Create"><h2>جدید</h2></a>
+<table class="table table-sm table-hover">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                نام
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a class="text-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a class="text-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

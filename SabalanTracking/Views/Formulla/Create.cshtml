@@ -4,9 +4,7 @@
     ViewData["Title"] = "تعریف فرمول جدید";
 }
 
-<h1>Create</h1>
-
-<h4>Formula</h4>
+<h4>فرمول جدید</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -43,8 +41,7 @@
 
                                 </td>
                                 <td>
-
-                                    @Html.EditorFor(m=>m.formullaDetails[i].quantity,"تعداد لازم جهت تولید")
+                                        @Html.EditorFor(m=>m.formullaDetails[i].quantity,"تعداد لازم جهت تولید")
                                 </td>
                                 <td>
                                     <button id="btnAdd-@i" type="button" class="btn btn-sm btn-secondary visible" onclick="AddItem(this)">Add</button>

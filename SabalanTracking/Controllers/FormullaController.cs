@@ -7,7 +7,7 @@ using SabalanTracking.Helper;
 
 namespace SabalanTracking.Controllers
 {
-    [Route("[Controller]")]
+   // [Route("[Controller]")]
     [TypeFilter(typeof(ViewBagFurmullaActionFilter))]
     public class FormullaController : Controller
     {
@@ -22,7 +22,7 @@ namespace SabalanTracking.Controllers
             _formullaDetailsService = formullaDetailsService;
             _unitOfWork = unitOfWork;
         }
-        [Route("[action]")]
+       // [Route("[action]")]
         public async Task<IActionResult> Index()
         {
             List<Formulla> formulas = await _formullaService.GetAllAsync();
@@ -30,7 +30,8 @@ namespace SabalanTracking.Controllers
         }
 
         [HttpGet]
-        [Route("[action]")]
+        //[Route("[action]")]
+        [TypeFilter(typeof(ViewBagMaterialsActionFilter))]
         public IActionResult Create()
         {
             Formulla formula = new Formulla();
@@ -39,7 +40,7 @@ namespace SabalanTracking.Controllers
         }
 
         [HttpPost]
-        [Route("[action]")]
+       // [Route("[action]")]
         public async Task<IActionResult> Create(Formulla formulla)
         {
             if (formulla is null)
@@ -47,11 +48,11 @@ namespace SabalanTracking.Controllers
                 return null;
             }
             await _formullaService.Create(formulla);
-            _unitOfWork.SaveChanges();
+           await _unitOfWork.SaveChanges();
             return RedirectToAction("Index");
         }
         [HttpGet]
-        [Route("[action]/{id}")]
+       // [Route("[action]/{id}")]
         public async Task<IActionResult> Details(int id)
         {
             var detail = await _formullaDetailsService.GetByFormullId(id);
@@ -60,7 +61,7 @@ namespace SabalanTracking.Controllers
         }
 
         [HttpGet]
-        [Route("[action]/{id}")]
+        //[Route("[action]/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var model = await _formullaService.GetById(id);
@@ -68,7 +69,7 @@ namespace SabalanTracking.Controllers
         }
 
         [HttpPost]
-        [Route("[action]/{id}")]
+       // [Route("[action]/{id}")]
         public async Task<IActionResult> Delete(Formulla formulla)
         {
             await _formullaService.delete(formulla.Id);
@@ -77,7 +78,7 @@ namespace SabalanTracking.Controllers
         }
 
         [HttpGet]
-        [Route("[action]/{id}")]
+       // [Route("[action]/{id}")]
         public async Task<string> GetByMaterialId(int id)
         {
             var list = await _formullaService.GetByMaterialID(id);

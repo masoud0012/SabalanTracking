@@ -5,7 +5,7 @@ using SabalanTracking.ServiceContrcats;
 
 namespace SabalanTracking.Controllers
 {
-    [Route("[Controller]")]
+    //[Route("[Controller]")]
     public class DeviceController : Controller
     {
         private readonly IDevice _service;
@@ -16,14 +16,14 @@ namespace SabalanTracking.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        [Route("[action]")]
+        //[Route("[action]")]
         public async Task<IActionResult> Index()
         {
             var list = await _service.GetAllAsync();
             return View(list);
         }
 
-        [Route("[action]")]
+       // [Route("[action]")]
         [HttpGet]
         public IActionResult Create()
         {
@@ -31,7 +31,7 @@ namespace SabalanTracking.Controllers
             return View(model);
         }
 
-        [Route("[action]")]
+       // [Route("[action]")]
         [HttpPost]
         public async Task<IActionResult> Create(Device model)
         {
@@ -41,7 +41,7 @@ namespace SabalanTracking.Controllers
         }
 
         [HttpGet]
-        [Route("[action]/{id}")]
+        //[Route("[action]/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var model = await _service.GetById(id);
@@ -50,7 +50,7 @@ namespace SabalanTracking.Controllers
         }
 
         [HttpPost]
-        [Route("[action]/{id}")]
+       // [Route("[action]/{id}")]
         public async Task<IActionResult> Delete(Device model)
         {
             await _service.delete(model.Id);
@@ -59,7 +59,7 @@ namespace SabalanTracking.Controllers
         }
 
         [HttpGet]
-        [Route("[action]/{id}")]
+      //  [Route("[action]/{id}")]
         public async Task<IActionResult> Edit(int id)
         {
             var model = await _service.GetById(id);
@@ -68,7 +68,7 @@ namespace SabalanTracking.Controllers
         }
 
         [HttpPost]
-        [Route("[action]/{id}")]
+       // [Route("[action]/{id}")]
         public async Task<IActionResult> Edit(Device model)
         {
             await _service.update(model);

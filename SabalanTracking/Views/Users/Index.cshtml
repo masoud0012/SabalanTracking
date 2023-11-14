@@ -1,0 +1,55 @@
+﻿@model List<ApplicationUser>
+
+@{
+    ViewData["Title"] = "Usrs";
+}
+
+<h1>لیست کاربرها</h1>
+
+<a class="text-success" asp-action="Create"><h2>جدید</h2></a>
+<table class="table table-sm table-hover">
+    <thead>
+        <tr>
+            <th>
+                نام
+            </th>
+            <th>
+               یوز
+            </th>
+            <th>
+                شماره تماس
+            </th>
+            <th>
+                ایمیل
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PersonName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+
+                <td>
+                    <a class="text-success" asp-action="EditRole" asp-route-id="@item.Id">EditRoles</a> |
+                    <a class="text-success" asp-action="Edit" asp-route-id="@item.Id">EditUser</a> |
+
+                    <a class="text-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

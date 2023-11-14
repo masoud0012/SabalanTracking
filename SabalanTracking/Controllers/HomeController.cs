@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using SabalanTracking.Models;
+using SabalanTracking.Models.IdentityEntities;
 using SabalanTracking.ServiceContrcats;
 using System.Diagnostics;
 
@@ -9,15 +11,20 @@ namespace SabalanTracking.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProcess _processService;
-        public HomeController(ILogger<HomeController> logger,IProcess processService)
+        public HomeController(ILogger<HomeController> logger, IProcess processService)
         {
-            _processService=processService;
+            _processService = processService;
             _logger = logger;
         }
         [Route("/")]
         [Route("[action]")]
         public async Task<IActionResult> Index()
         {
+
+            if (User.Identity is null || !User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction(nameof(SignIn),"Logging");
+            }
             var list = (await _processService.GetAllAsync()).Take(5).ToList();
             return View(list);
         }
